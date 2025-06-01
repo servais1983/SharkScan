@@ -1,6 +1,6 @@
 # 🦈 SharkScan - Professional Network Security Scanner
 
-SharkScan is now available at: https://github.com/servais1983/SharkScan
+
 
 ## Project Status
 
