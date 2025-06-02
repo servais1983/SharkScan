@@ -1,0 +1,3 @@
+"""
+SharkScan source package
+"""
