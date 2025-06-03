@@ -136,7 +136,7 @@ def main():
             sys.exit(1)
         
         # Check privileges for certain modules
-        privileged_modules = ['lateral', 'lorenzini', 'dermoid']
+        privileged_modules = ['lateral'] if os.name == 'nt' else ['lateral', 'lorenzini', 'dermoid']
         if args.module in privileged_modules and not check_privileges():
             warning_msg = f"Module '{args.module}' requires root privileges. Use sudo."
             logger.warning(warning_msg)

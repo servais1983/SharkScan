@@ -7,7 +7,11 @@ import os
 import socket
 import ipaddress
 import validators
+import logging
 from typing import Union, List, Tuple
+
+# Configuration du logger
+logger = logging.getLogger(__name__)
 
 
 def validate_target(target: str) -> bool:
@@ -45,9 +49,17 @@ def validate_target(target: str) -> bool:
     return False
 
 
-def check_privileges() -> bool:
-    """Check if running with root privileges"""
-    return os.geteuid() == 0
+def check_privileges():
+    """Check if the script is running with elevated privileges"""
+    try:
+        if os.name == 'nt':  # Windows
+            import ctypes
+            return ctypes.windll.shell32.IsUserAnAdmin() != 0
+        else:  # Unix/Linux
+            return os.geteuid() == 0
+    except Exception as e:
+        logger.error(f"Error checking privileges: {str(e)}")
+        return False
 
 
 def parse_ports(port_string: str) -> List[int]:
