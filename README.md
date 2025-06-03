@@ -1,4 +1,4 @@
-![image](https://github.com/shark.png)
+![image](shark.png)
 
 
 
