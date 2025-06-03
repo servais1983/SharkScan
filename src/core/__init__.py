@@ -1,8 +1,8 @@
 """
-Core functionality for SharkScan
+Core package for SharkScan
 """
 
-from .scanner import BaseScanner, ScannerFactory
-from .utils import validate_target, check_privileges
+from .config_manager import ConfigManager
+from .secure_logger import SecureLogger
 
-__all__ = ['BaseScanner', 'ScannerFactory', 'validate_target', 'check_privileges']
+__all__ = ['ConfigManager', 'SecureLogger']

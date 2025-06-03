@@ -33,6 +33,34 @@ class BaseScanner(ABC):
         return True
 
 
+class Scanner(BaseScanner):
+    """Main scanner class for SharkScan"""
+    
+    def __init__(self, args):
+        super().__init__(args)
+        self.results = {}
+        
+    def scan(self, target: str) -> Dict[str, Any]:
+        """Execute the scan on the target"""
+        self.logger.info(f"Starting scan on target: {target}")
+        # Implement basic scanning logic here
+        self.results = {
+            'target': target,
+            'status': 'completed',
+            'findings': []
+        }
+        return self.results
+    
+    def display_results(self, results: Dict[str, Any]) -> None:
+        """Display scan results in a formatted way"""
+        console.print(f"\n[bold blue]Scan Results for {results['target']}[/bold blue]")
+        console.print(f"Status: {results['status']}")
+        if results['findings']:
+            console.print("\n[bold]Findings:[/bold]")
+            for finding in results['findings']:
+                console.print(f"- {finding}")
+
+
 class ScannerFactory:
     """Factory class to create scanner instances"""
     

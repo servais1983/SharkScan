@@ -14,14 +14,16 @@ SharkScan est un scanner de sécurité réseau professionnel inspiré de l'anato
 
 ## 🦈 Modules Anatomiques
 
-1. **Ligne Latérale** - Détection passive de trafic réseau anormal
-2. **Ampoules de Lorenzini** - Découverte réseau via ARP Scan
-3. **Dents** - Scan de vulnérabilités avancé avec nmap
-4. **Nageoire Caudale** - Scan rapide de ports TCP
-5. **Peau Dermoïde** - Scan furtif évitant IDS/IPS
-6. **Foie Géant** - Scan complet longue durée
-7. **Système Olfactif** - Détection de fuites de données
-8. **Vision** - Analyse DNS et détection de services
+1. **Ligne Latérale** (`lateral.py`) - Détection passive de trafic réseau anormal
+2. **Ampoules de Lorenzini** (`lorenzini.py`) - Découverte réseau via ARP Scan
+3. **Dents** (`dents.py`) - Scan de vulnérabilités avancé avec nmap
+4. **Nageoire Caudale** (`caudale.py`) - Scan rapide de ports TCP
+5. **Peau Dermoïde** (`dermoid.py`) - Scan furtif évitant IDS/IPS
+6. **Foie Géant** (`foie.py`) - Scan complet longue durée
+7. **Système Olfactif** (`olfactif.py`) - Détection de fuites de données
+8. **Vision** (`vision.py`) - Analyse DNS et détection de services
+
+Chaque module est conçu pour être modulaire et extensible, suivant une architecture orientée objet avec une classe principale (ex: `VisionScanner`) qui implémente les méthodes `scan()` et `display_results()`.
 
 ## 🔧 Installation
 
@@ -139,14 +141,14 @@ SharkScan/
 │   │   └── utils.py      # Utilitaires communs
 │   └── modules/          # Modules anatomiques
 │       ├── __init__.py
-│       ├── lateral_line.py    # Détection passive
-│       ├── lorenzini.py       # ARP Scan
-│       ├── teeth.py           # Vulnérabilités
-│       ├── caudal_fin.py      # Scan rapide
-│       ├── dermoid.py         # Scan furtif
-│       ├── liver.py           # Scan complet
-│       ├── olfactory.py       # Fuites de données
-│       └── vision.py          # Analyse DNS
+│       ├── lateral.py    # Détection passive
+│       ├── lorenzini.py  # ARP Scan
+│       ├── dents.py      # Vulnérabilités
+│       ├── caudale.py    # Scan rapide
+│       ├── dermoid.py    # Scan furtif
+│       ├── foie.py       # Scan complet
+│       ├── olfactif.py   # Fuites de données
+│       └── vision.py     # Analyse DNS
 ├── utils/
 │   ├── __init__.py
 │   ├── colors.py         # Gestion des couleurs
