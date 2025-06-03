@@ -48,10 +48,48 @@ source venv/bin/activate
 # Installer les dépendances
 pip install -r requirements.txt
 
+# Installer les dépendances de développement (optionnel)
+pip install -r requirements-dev.txt
+
 # Installer nmap si nécessaire
 sudo apt-get update
 sudo apt-get install nmap
 ```
+
+### Configuration
+
+1. Créer un fichier `.env` à la racine du projet :
+```bash
+# Le fichier .env.example sera créé lors de l'installation
+# Copier le template
+cp .env.example .env
+
+# Éditer le fichier avec vos paramètres
+nano .env
+```
+
+2. Variables d'environnement disponibles :
+```bash
+# Configuration générale
+DEBUG=false
+LOG_LEVEL=INFO
+
+# Configuration réseau
+DEFAULT_TIMEOUT=5
+MAX_THREADS=100
+STEALTH_MODE=false
+
+# Configuration des scans
+DEFAULT_PORTS=80,443,8080
+SCAN_DELAY=1
+MAX_RETRIES=3
+
+# Configuration de la sécurité
+API_KEY=your_api_key_here
+ALLOWED_IPS=192.168.1.0/24,10.0.0.0/8
+```
+
+Ces variables peuvent être modifiées selon vos besoins. Consultez la documentation pour plus de détails sur chaque option.
 
 ## 🚀 Utilisation
 

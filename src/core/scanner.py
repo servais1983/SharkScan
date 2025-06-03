@@ -90,8 +90,8 @@ class ScannerFactory:
             return DermoidScanner(args)
         
         elif module == 'foie':
-            from src.modules.liver import LiverScanner
-            return LiverScanner(args)
+            from src.modules.foie import FoieScanner
+            return FoieScanner(args)
         
         elif module == 'olfactif':
             from src.modules.olfactory import OlfactoryScanner

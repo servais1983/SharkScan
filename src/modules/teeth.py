@@ -42,17 +42,12 @@ class TeethScanner(BaseScanner):
             'vuln',
             'exploit',
             'auth',
-            'default',
-            'discovery',
-            'external',
-            'intrusive',
-            'malware',
-            'safe',
-            'version'
+            'default'
         ]
         
-        # Construct nmap command
-        script_args = '--script-args="mssql.instance-port=1433,oracle-enum-users.sid=ORCL,http-enum.basepath=/"
+        # Construct nmap command with shorter timeout
+        script_args = '--script-args="mssql.instance-port=1433,oracle-enum-users.sid=ORCL,http-enum.basepath=/"'
+        nmap_args = f'-sV -sC --script={",".join(vuln_scripts)} {script_args} -Pn --max-retries 2 --host-timeout 60s'
         
         from rich.console import Console
         console = Console()
@@ -61,13 +56,17 @@ class TeethScanner(BaseScanner):
             task = progress.add_task("[cyan]Running vulnerability scan...", total=100)
             
             try:
+                self.logger.info(f"Running nmap with arguments: {nmap_args}")
+                console.print(f"[yellow]Running nmap scan with timeout of 60 seconds...[/yellow]")
+                
                 # Run comprehensive vulnerability scan
                 self.nm.scan(
                     hosts=target_ip,
-                    arguments=f'-sV -sC --script=vuln,exploit,auth,default {script_args} -Pn --max-retries 3'
+                    arguments=nmap_args
                 )
                 
                 progress.update(task, advance=50)
+                self.logger.info("Nmap scan completed, processing results...")
                 
                 # Process results
                 for host in self.nm.all_hosts():
@@ -122,6 +121,7 @@ class TeethScanner(BaseScanner):
                 
             except Exception as e:
                 self.logger.error(f"Error during vulnerability scan: {str(e)}")
+                console.print(f"[red]Error during scan: {str(e)}[/red]")
                 results['error'] = str(e)
         
         results['total_vulns'] = len(results['vulnerabilities'])
